@@ -1,0 +1,60 @@
+{% block content %}
+    <h1>Reviews dos jogos</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Numero</td>
+                <td>Jogo</td>
+                <td>Data de lançamento</td>
+                <td>Preço</td>
+                <td>Jogadores</td>
+                <td>Desenvolvedor</td>
+                <td>Publicador</td>
+                <td>Tempo medio de jogo</td>
+                <td>Tempo mediano de jogo</td>
+                <td>Metascore</td>
+                <td>Ações</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td>{{object.number}}</td>
+                    <td>{{object.game}}</td>
+                    <td>{{object.release_date}}</td>
+                    <td>{{object.price}}</td>
+                    <td>{{object.owners}}</td>
+                    <td>{{object.developer}}</td>
+                    <td>{{object.publisher}}</td>
+                    <td>{{object.average_playtime}}</td>
+                    <td>{{object.median_playtime}}</td>
+                    <td>{{object.metascore}}</td>
+                    <td>
+                        Botoes de ações
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; primeira</a>
+                <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">próxima</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+    {% endblock content %}
