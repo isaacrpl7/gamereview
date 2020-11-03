@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Nova Review
+{% endblock title %}
+
+{% block content %}
+    <h1>Nova Review</h1>
+
+    <form action="" method="post" autocomplete="off">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success"><i class="fa fa-database"></i>&emsp;Salvar</button>
+    </form>
+{% endblock content %}
