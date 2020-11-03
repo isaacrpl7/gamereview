@@ -7,17 +7,22 @@
     {% load extras %}
     <h1>Reviews dos jogos</h1>
     
-    <form method="get">
-        {{myFilter.form}}
-    <button class="btn btn-primary" type="submit">Buscar</button>
-    </form>
-
-    <table id="game-table" class="table table-bordered table-sm" cellspacing="0" width="100%">
+    <div class="header-table">
+        <form method="get">
+            <p style="margin-bottom: 0.5rem">Procurar por nome:</p>
+            <div class="busca">
+                {{myFilter.form.game}}
+                <button class="botao_busca" type="submit">Buscar</button>
+            </div>
+        </form>
+        <a class="btn-nova-review" href="{% url 'reviews-add' %}">Nova Review</a>
+    </div>
+    <table id="game-table" class="" cellspacing="0" width="100%">
         <thead class="border-bottom font-weight-bold">
             <tr>
                 <th class="th-sm">Numero</th>
-                <th class="th-sm">Data de lançamento</th>
                 <th class="th-sm">Jogo</th>
+                <th class="th-sm">Data de lançamento</th>
                 <th class="th-sm">Preço</th>
                 <th class="th-sm">Jogadores</th>
                 <th class="th-sm">Desenvolvedor</th>
@@ -43,7 +48,7 @@
                     <td>{{object.median_playtime}}</td>
                     <td>{{object.metascore}}</td>
                     <td>
-                        Botoes de ações
+                        Acoes
                     </td>
                 </tr>
             {% endfor %}
@@ -53,8 +58,8 @@
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
-                <a href="{% my_url 1 'page' request.GET.urlencode %}">&laquo; primeira</a>
-                <a href="{% my_url page_obj.previous_page_number 'page' request.GET.urlencode %}">anterior</a>
+                <a class="botao_pagina" href="{% my_url 1 'page' request.GET.urlencode %}">&laquo; primeira</a>
+                <a class="botao_pagina" href="{% my_url page_obj.previous_page_number 'page' request.GET.urlencode %}">anterior</a>
             {% endif %}
 
             <span class="current">
@@ -62,8 +67,8 @@
             </span>
 
             {% if page_obj.has_next %}
-                <a href="{% my_url page_obj.next_page_number 'page' request.GET.urlencode %}">próxima</a>
-                <a href="{% my_url page_obj.paginator.num_pages 'page' request.GET.urlencode %}">última &raquo;</a>
+                <a class="botao_pagina" href="{% my_url page_obj.next_page_number 'page' request.GET.urlencode %}">próxima</a>
+                <a class="botao_pagina" href="{% my_url page_obj.paginator.num_pages 'page' request.GET.urlencode %}">última &raquo;</a>
             {% endif %}
         </span>
     </div>
@@ -71,26 +76,5 @@
     <script>
         $(document).ready(function () {
         });
-        function searchFunction() {
-            // Declare variables
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("search-input");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("game-table");
-            tr = table.getElementsByTagName("tr");
-
-            // Loop through all table rows, and hide those who don't match the search query
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
-                if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-                }
-            }
-        }
     </script>
 {% endblock content %}
