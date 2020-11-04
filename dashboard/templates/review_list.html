@@ -8,7 +8,7 @@
     <h1>Reviews dos jogos</h1>
     
     <div class="header-table">
-        <form method="get">
+        <form method="get" class="busca-form">
             <p style="margin-bottom: 0.5rem">Procurar por nome:</p>
             <div class="busca">
                 {{myFilter.form.game}}
@@ -16,6 +16,7 @@
             </div>
         </form>
         <a class="btn-nova-review" href="{% url 'reviews-add' %}">Nova Review</a>
+        <a class="btn-nova-review" href="{% url 'index' %}">Dashboard</a>
     </div>
     <table id="game-table" class="" cellspacing="0" width="100%">
         <thead class="border-bottom font-weight-bold">
@@ -47,8 +48,14 @@
                     <td>{{object.average_playtime}}</td>
                     <td>{{object.median_playtime}}</td>
                     <td>{{object.metascore}}</td>
-                    <td>
-                        Acoes
+                    <td class="last">
+                        <a class="botao_form" href="{% url 'reviews-update' object.id %}">Editar</a>
+                        <form class="form-del" action="{% url 'reviews-delete' object.id %}" onsubmit="return confirm('Você tem certeza?');" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="botao_form del">
+                                Excluir
+                            </button>
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

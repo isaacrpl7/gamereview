@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}
+    Dashboard
+{% endblock title %}
+{% block content %}
+
+    <h1>Dashboard</h1>
+
+    <a class="list" href="{% url 'reviews-list' %}">Ver lista de reviews</a>
+
+    <div class="header-cards">
+        <div class="mycard">
+            <h3>Total de reviews:</h3>
+            <p>{{total_reviews}}</p>
+        </div>
+
+        <div class="mycard card2">
+            <h3>Jogos com média de tempo de jogo acima de 0:</h3>
+            <p>{{average_above_zero}}</p>
+        </div>
+
+        <div class="mycard card3">
+            <h3>Jogos sem metascore:</h3>
+            <p>{{metascore_zero}}</p>
+        </div>
+    </div>
+    
+    <div class="row1-graph">
+        <div class="card-avg">
+            <p>Os 5 maiores tempos médios de jogo</p>
+            <div id="container" class="graph">
+                <canvas id="avg-playtime-chart"></canvas>
+            </div>
+        </div>
+
+        <div class="card-avg">
+            <p>Os 5 maiores tempos medianos de jogo</p>
+            <div id="container" class="graph">
+                <canvas id="median-playtime-chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="price-chart">
+        <p>Metascore dos jogos mais caros</p>
+        <div id="container" class="graph-price">
+            <canvas id="price-chart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+            data: {{ data_avg|safe }},
+            backgroundColor: [
+                '#1cc88a', '#f6c23e', '#e74a3b', '#36b9cc', '#4e73df'
+            ],
+            label: 'Population'
+            }],
+            labels: {{ labels_avg|safe }}
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position: 'bottom',
+            }
+        }
+        };
+        window.onload = function() {
+        var ctx = document.getElementById('avg-playtime-chart').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+        };
+
+        var medianPlaytimeChart = new Chart(document.getElementById('median-playtime-chart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: {{ labels_median|safe }},
+                datasets: [{
+                    data: {{ data_median|safe }},
+                    backgroundColor: [
+                        '#1cc88a', '#f6c23e', '#e74a3b', '#36b9cc', '#4e73df'
+                    ],
+                    label: 'Tempo mediano'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'bottom',
+                }
+            }
+
+        });
+
+        var priceChart = new Chart(document.getElementById('price-chart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: {{ labels_price|safe }},
+                datasets: [{
+                    barPercentage: 0.5,
+                    barThickness: 50,
+                    maxBarThickness: 50,
+                    minBarLenght: 2,
+                    data: {{ radius_price|safe }},
+                    backgroundColor: '#4e73df',
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: false,
+                }
+            }
+        });
+  </script>
+{% endblock content %}

@@ -5,19 +5,6 @@ from dashboard.models import Review
 from dashboard.filters import ReviewFilter
 from django.core.paginator import Paginator
 
-# class ReviewsList(ListView):
-#     model = Review
-#     paginate_by = 10
-
-#     def get_context_data(self, **kwargs):
-#         # Call the base implementation first to get a context
-#         context = super().get_context_data(**kwargs)
-#         # Add in a QuerySet of all the books
-#         reviews = Review.objects.all()
-#         context['myFilter'] = ReviewFilter(self.request.GET, queryset=reviews)
-#         queryset = context['myFilter'].qs
-#         return context
-
 def show_page(request):
     context = {}
 
@@ -38,13 +25,14 @@ def show_page(request):
 class ReviewsCreate(CreateView):
     model = Review
     fields = ['number', 'game', 'release_date', 'price', 'owners', 'developer', 'publisher', 'average_playtime', 'median_playtime', 'metascore']
+    success_url = '/dashboard/reviews'
 
 class ReviewsUpdate(UpdateView):
     model = Review
     fields = ['number', 'game', 'release_date', 'price', 'owners', 'developer', 'publisher', 'average_playtime', 'median_playtime', 'metascore']
-    success_url = '/'
+    success_url = '/dashboard/reviews'
 
 def delete(request, id):
     formObject = Review.objects.get(pk=id)
     formObject.delete()
-    return redirect('dashboard:reviews-list')
+    return redirect('reviews-list')

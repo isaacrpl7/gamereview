@@ -11,10 +11,30 @@ body {
     color: #5a5c69;
     background-color: #f8f9fc;
 }
+.list {
+    display: flex;
+    justify-content: center;
+    margin: 5rem auto;
+    margin-top: 0;
+    padding: 0;
+    color: #858796;
+}
+.list:hover {
+    text-decoration: none;
+    color: #4e73df;
+}
 .header-table {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+}
+.busca-form {
+    border-radius: 1rem;
+    box-shadow: 0px 0px 20px #eaeaee;
+    background-color: #fff;
+    margin: 1rem;
+    padding: 1rem;
+    margin-left: 0;
 }
 .busca {
     display: flex;
@@ -24,7 +44,7 @@ body {
     margin-bottom: 1rem;
 }
 #id_game{
-    background-color: #fff;
+    background-color: #eaeaee;
     border: 1px solid #eaeaee;
     border-radius: 0.2rem;
     height: 2.5rem;
@@ -44,6 +64,7 @@ p{
     text-align: center;
     vertical-align: middle;
     border-radius: 0.2rem;
+    margin-left: 1rem;
 }
 .btn-nova-review:hover {
     background-color: #4e73df;
@@ -57,14 +78,16 @@ table {
     background-color: white;
     border-radius: 1rem;
     box-shadow: 0px 0px 20px #eaeaee;
+    margin: 0 auto;
+    font-size: 0.9rem;
 }
 td {
     border-top: 1px solid #eaeaee;
     border-bottom: 1px solid #eaeaee;
-    padding: 0.5rem;
+    padding: 0.8rem 0.9rem;
 }
 th {
-    padding: 0.5rem;
+    padding: .08rem 0.9rem;
 }
 
 .botao_busca{
@@ -105,6 +128,42 @@ th {
     margin: 2rem;
 }
 
+.botao_form {
+    border: 1px solid #4e73df;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+    padding: 0.4rem;
+    text-align: center;
+    vertical-align: middle;
+    color: #4e73df;
+    background-color: #fff;
+}
+
+.botao_form:hover {
+    background-color: #4e73df;
+    color: white;
+    text-decoration: none;
+}
+
+.del {
+    border: 1px solid #e74a3b;
+}
+
+.del:hover {
+    background-color: #e74a3b;
+    color: white;
+}
+
+.last {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-del {
+    margin: 0;
+    padding: 0;
+}
+
 /* CSS DA PAGINA DE NOVO/UPDATE */
 .novo {
     border: 1px solid #e3e6f0;
@@ -140,4 +199,103 @@ th {
     color: white;
     text-decoration: none;
     box-shadow: 0px 0px 20px #eaeaee;
+}
+
+/* DASHBOARD */
+.graph {
+    margin: 0;
+    padding: 1rem 3rem;
+    position: relative;
+    height: 30rem;
+    width: 25rem;
+    background-color: #fff;
+}
+
+.card-avg{
+    border-radius: 1rem;
+    height: 35rem;
+    width: 25rem;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px #eaeaee;
+}
+
+.card-avg p {
+    font-weight: 900;
+    text-align: center;
+    color: #4e73df;
+    padding: 1rem;
+}
+
+.row1-graph {
+    display: flex;
+    justify-content: space-around;
+    margin: 5rem 0;
+}
+
+
+/* GRÁFICO METASCORE */
+.graph-price {
+    position: relative;
+    height: 30rem;
+    width: 65rem;
+}
+
+.price-chart {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px #eaeaee;
+    border-radius: 1rem;
+    padding: 5rem 0;
+    padding-top: 0;
+}
+
+.price-chart p {
+    font-weight: 900;
+    text-align: center;
+    color: #4e73df;
+    padding: 2.5rem 0;
+}
+
+/* CARDS HEADER */
+.header-cards {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.mycard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 20rem;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0px 0px 20px #eaeaee;
+    border-radius: 1rem;
+    border-left: 5px solid #4e73df;
+}
+
+.mycard h3 {
+    color: #4e73df;
+    padding-left: 1rem;
+}
+
+.mycard p {
+    font-size: 2rem;
+    font-weight: 900;
+    padding-left: 1rem;
+}
+
+.card2 {
+    border-left: 5px solid #1cc88a;
+}
+.card2 h3 {
+    color: #1cc88a;
+}
+
+.card3 {
+    border-left: 5px solid #e74a3b;
+}
+.card3 h3 {
+    color: #e74a3b;
 }
